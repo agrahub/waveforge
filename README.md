@@ -1,126 +1,187 @@
-# Python Package Template
+# WaveForge
 
-Production-ready Python package template with modern tooling, strict typing, and scalable project structure.
+A Python toolkit for generating, storing, and loading Discrete Wavelet Transform (DWT) coefficient configurations.
+
+## Overview
+
+WaveForge provides a structured approach to managing DWT filter coefficient configurations across different wavelet families.
+
+Currently, WaveForge implements the **Quadratic Spline Wavelet** coefficient generator, supporting the generation of coefficient configurations at multiple scales. Configurations can be saved as JSON files and loaded back into validated Python objects using Pydantic.
 
 ## Features
 
-- Modern `uv`-based workflow
-- `src/` package layout
-- Ruff linting and formatting
-- Pyright static type checking
-- pytest testing setup
-- GitHub Actions CI
-- PEP 621 packaging
-- Pre-configured pre-commit hooks
-- Typed package support via `py.typed`
+- Generate Quadratic Spline DWT coefficients for individual scales.
+- Generate coefficient configurations across multiple scales.
+- Automatically generate configuration filenames based on wavelet metadata.
+- Save coefficient configurations as JSON files.
+- Load and validate coefficient configurations from JSON files.
+- Validate configuration structures using Pydantic.
 
----
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd waveforge
+```
+
+Install the package in editable mode:
+
+```bash
+pip install -e .
+```
+
+## Usage
+
+### 1. Generate Coefficient Configurations
+
+Generate coefficients for a specific scale:
+
+```python
+from waveforge.wavelets.quadratic_spline import (
+    generate_scale_configuration
+)
+
+scale_config = generate_scale_configuration(3)
+
+print(scale_config)
+```
+
+Generate configurations from scale 1 up to a specified maximum scale:
+
+```python
+from waveforge.wavelets.quadratic_spline import (
+    generate_coefficients
+)
+
+config = generate_coefficients(5)
+```
+
+### 2. Save Coefficient Configurations
+
+Save a configuration as a JSON file:
+
+```python
+from waveforge.wavelets.quadratic_spline import (
+    generate_coefficients,
+    save_coefficients
+)
+
+config = generate_coefficients(5)
+
+output_path = save_coefficients(config)
+
+print(output_path)
+```
+
+By default, the file is saved in the current working directory.
+
+You can also specify a destination directory:
+
+```python
+output_path = save_coefficients(
+    config,
+    dir="data/coefficients"
+)
+```
+
+The filename is automatically generated using the wavelet name, configuration version, and scale range.
+
+Example:
+
+```text
+quadratic_spline_v1.0_scales_1-5.json
+```
+
+### 3. Load Coefficient Configurations
+
+Load a previously saved configuration:
+
+```python
+from waveforge.wavelets.quadratic_spline import (
+    load_coefficients
+)
+
+config = load_coefficients(
+    "quadratic_spline_v1.0_scales_1-5.json"
+)
+```
+
+You can also specify the directory containing the JSON file:
+
+```python
+config = load_coefficients(
+    "quadratic_spline_v1.0_scales_1-5.json",
+    dir="data/coefficients"
+)
+```
+
+The loader reconstructs and validates the configuration using Pydantic.
+
+## Configuration Models
+
+WaveForge uses two primary data models:
+
+| Model | Description |
+|---|---|
+| `ScaleConfiguration` | Represents DWT filter coefficients and their associated parameters at a specific scale. |
+| `DWTConfiguration` | Represents a complete DWT configuration containing coefficient data across multiple scales. |
+
+Both models are available directly from the main package:
+
+```python
+from waveforge import DWTConfiguration, ScaleConfiguration
+```
 
 ## Project Structure
 
 ```text
-.
-├── .github/
-│   └── workflows/
-├── src/
-│   └── package_name/
-├── tests/
-├── .gitignore
-├── .pre-commit-config.yaml
-├── LICENSE
+waveforge/
 ├── pyproject.toml
-└── README.md
+├── README.md
+├── src/
+│   └── waveforge/
+│       ├── __init__.py
+│       ├── models.py
+│       ├── wavelets/
+│       │   ├── __init__.py
+│       │   └── quadratic_spline/
+│       │       ├── __init__.py
+│       │       ├── generator.py
+│       │       └── loader.py
+│       └── data/
+└── tests/
+    ├── test_models.py
+    └── wavelets/
+        └── quadratic_spline/
+            ├── test_generator.py
+            └── test_loader.py
 ```
 
----
+## Testing
 
-## Requirements
+WaveForge uses `pytest` for automated testing.
 
-- Python 3.13+
-- `uv`
-
-Install `uv` by following the official documentation:
-
-- https://docs.astral.sh/uv/getting-started/installation/
-
----
-
-## Quick Start
-
-### Create virtual environment
+Install pytest:
 
 ```bash
-uv venv
+pip install pytest
 ```
 
-### Install dependencies
+Run the test suite from the project root:
 
 ```bash
-uv sync
+pytest -v
 ```
 
-### Run tests
+## Dependencies
 
-```bash
-uv run pytest
-```
-
-### Run linting
-
-```bash
-uv run ruff check .
-```
-
-### Run formatting
-
-```bash
-uv run ruff format .
-```
-
-### Run type checking
-
-```bash
-uv run pyright
-```
-
----
-
-## Included Tooling
-
-### Ruff
-
-Used for:
-- linting
-- formatting
-- import sorting
-
-### Pyright
-
-Used for strict static type checking.
-
-### pytest
-
-Used for testing.
-
-### pre-commit
-
-Runs automated checks before commits.
-
----
-
-## Design Principles
-
-This template prioritizes:
-
-- simplicity
-- strict typing
-- reproducibility
-- scalable project structure
-- modern Python standards
-- minimal tooling friction
-
----
+- Python 3.10 or later
+- Pydantic 2.x
+- pytest (development and testing)
 
 ## License
 
-MIT
+No license has been specified yet.
+

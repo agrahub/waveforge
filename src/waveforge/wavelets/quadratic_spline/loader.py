@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from wavekit.models import DWTConfiguration
+from waveforge.models import DWTConfiguration
 
 
 def load_coefficients(filename: str, dir: str | Path | None = None) -> DWTConfiguration:

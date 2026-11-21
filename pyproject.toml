@@ -1,5 +1,5 @@
 [project]
-name = "wavekit"
+name = "waveforge"
 version = "0.1.0"
 description = "A toolkit for generating and managing DWT configurations."
 authors = [
@@ -25,7 +25,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/wavekit"]
+packages = ["src/waveforge"]
 
 [tool.ruff]
 line-length = 88

@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-from wavekit.models import DWTConfiguration, ScaleConfiguration
+from waveforge.models import DWTConfiguration, ScaleConfiguration
 
 
 def generate_scale_configuration(scale: int) -> ScaleConfiguration:
