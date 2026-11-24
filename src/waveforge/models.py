@@ -24,6 +24,11 @@ class ScaleConfiguration(BaseModel):
 
         return self
 
+    @property
+    def coefficients(self) -> list[float]:
+        """Compute the normalized coefficients from numerators and denominator."""
+        return [num / self.denominator for num in self.numerators]
+
 
 class DWTConfiguration(BaseModel):
     """Configuration containing DWT coefficients across multiple scales."""
