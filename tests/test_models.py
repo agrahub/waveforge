@@ -1,6 +1,6 @@
 import pytest
 
-from wavekit.models import DWTConfiguration, ScaleConfiguration
+from waveforge.models import DWTConfiguration, ScaleConfiguration
 
 
 class TestScaleConfiguration:

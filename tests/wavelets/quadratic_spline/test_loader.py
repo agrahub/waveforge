@@ -3,8 +3,8 @@ import json
 import pytest
 from pydantic import ValidationError
 
-from wavekit.models import DWTConfiguration
-from wavekit.wavelets.quadratic_spline import generator, loader
+from waveforge.models import DWTConfiguration
+from waveforge.wavelets.quadratic_spline import generator, loader
 
 
 class TestLoadCoefficients:

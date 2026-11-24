@@ -1,0 +1,14 @@
+
+{
+    "include": [
+        "src/waveforge"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/.venv",
+        "**/dist",
+        "**/build",
+        "**/.pytest_cache"
+    ],
+    "typeCheckingMode": "strict"
+}

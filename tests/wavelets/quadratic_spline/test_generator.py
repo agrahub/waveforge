@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from wavekit.wavelets.quadratic_spline import generator
+from waveforge.wavelets.quadratic_spline import generator
 
 
 class TestGenerateScaleConfiguration:
