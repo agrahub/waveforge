@@ -1,6 +1,6 @@
 [project]
 name = "waveforge"
-version = "0.2.0"
+version = "0.2.1"
 description = "A toolkit for generating and managing DWT configurations."
 authors = [
     { name = "Agra Bima Yuda", email = "hub.agrayuda@gmail.com" }

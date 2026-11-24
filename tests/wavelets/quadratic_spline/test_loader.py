@@ -19,7 +19,6 @@ class TestLoadCoefficients:
 
         assert isinstance(loaded_config, DWTConfiguration)
         assert loaded_config.wavelet == "Quadratic Spline"
-        assert loaded_config.version == "1.0"
         assert len(loaded_config.scales) == 3
 
         # Verify that the loaded coefficients match the original
@@ -49,7 +48,6 @@ class TestLoadCoefficients:
     def test_load_invalid_configuration(self, tmp_path):
         invalid_data = {
             "wavelet": "Quadratic Spline",
-            "version": "1.0",
             "scales": {
                 "1": {
                     "min_index": -1,
@@ -68,7 +66,7 @@ class TestLoadCoefficients:
             loader.load_configuration(file_path.name, dir=tmp_path)
 
     def test_load_different_wavelet(self, tmp_path):
-        config = DWTConfiguration(wavelet="Daubechies", version="1.0", scales={})
+        config = DWTConfiguration(wavelet="Daubechies", scales={})
 
         file_path = tmp_path / "other_wavelet.json"
         file_path.write_text(config.model_dump_json(indent=4), encoding="utf-8")

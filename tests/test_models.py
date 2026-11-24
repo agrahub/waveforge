@@ -42,7 +42,6 @@ class TestDWTConfiguration:
     def test_valid_configuration(self):
         config = DWTConfiguration(
             wavelet="Quadratic Spline",
-            version="1.0",
             scales={
                 1: ScaleConfiguration(
                     min_index=-1,
@@ -55,13 +54,11 @@ class TestDWTConfiguration:
         )
 
         assert config.wavelet == "Quadratic Spline"
-        assert config.version == "1.0"
         assert 1 in config.scales
 
     def test_json_serialization(self):
         config = DWTConfiguration(
             wavelet="Quadratic Spline",
-            version="1.0",
             scales={
                 1: ScaleConfiguration(
                     min_index=-1,

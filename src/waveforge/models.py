@@ -31,5 +31,4 @@ class DWTConfiguration(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     wavelet: str
-    version: str
     scales: dict[int, ScaleConfiguration]

@@ -63,7 +63,7 @@ def generate_configuration(max_scale: int) -> DWTConfiguration:
         scale: generate_scale_configuration(scale) for scale in range(1, max_scale + 1)
     }
 
-    return DWTConfiguration(wavelet="Quadratic Spline", version="1.0", scales=scales)
+    return DWTConfiguration(wavelet="Quadratic Spline", scales=scales)
 
 
 def save_configuration(config: DWTConfiguration, dir: str | Path | None = None) -> Path:
@@ -76,10 +76,7 @@ def save_configuration(config: DWTConfiguration, dir: str | Path | None = None) 
     if not scale_numbers:
         raise ValueError("Cannot save an empty configuration.")
 
-    filename = (
-        f"{wavelet_name}_v{config.version}_"
-        f"scales_{scale_numbers[0]}-{scale_numbers[-1]}.json"
-    )
+    filename = f"{wavelet_name}_scales_{scale_numbers[0]}-{scale_numbers[-1]}.json"
 
     output_dir = Path(dir) if dir is not None else Path.cwd()
     output_dir.mkdir(parents=True, exist_ok=True)

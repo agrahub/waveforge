@@ -53,7 +53,6 @@ class TestGenerateCoefficients:
         config = generator.generate_configuration(5)
 
         assert config.wavelet == "Quadratic Spline"
-        assert config.version == "1.0"
         assert list(config.scales.keys()) == [1, 2, 3, 4, 5]
 
     def test_invalid_max_scale(self):
@@ -69,20 +68,17 @@ class TestSaveCoefficients:
         output_path = generator.save_configuration(config, dir=tmp_path)
 
         assert output_path.exists()
-        assert output_path.name == ("quadratic_spline_v1.0_scales_1-3.json")
+        assert output_path.name == ("quadratic_spline_scales_1-3.json")
         assert output_path.parent == tmp_path
 
         with output_path.open("r", encoding="utf-8") as file:
             saved_data = json.load(file)
 
         assert saved_data["wavelet"] == "Quadratic Spline"
-        assert saved_data["version"] == "1.0"
         assert len(saved_data["scales"]) == 3
 
     def test_save_empty_configuration(self):
-        config = generator.DWTConfiguration(
-            wavelet="Quadratic Spline", version="1.0", scales={}
-        )
+        config = generator.DWTConfiguration(wavelet="Quadratic Spline", scales={})
 
         with pytest.raises(ValueError):
             generator.save_configuration(config)
