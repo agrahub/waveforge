@@ -3,7 +3,9 @@ from pathlib import Path
 from waveforge.models import DWTConfiguration
 
 
-def load_configuration(filename: str, dir: str | Path | None = None) -> DWTConfiguration:
+def load_configuration(
+    filename: str, dir: str | Path | None = None
+) -> DWTConfiguration:
     """
     Load Quadratic Spline DWT configuration from a JSON file.
 
