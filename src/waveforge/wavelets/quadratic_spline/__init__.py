@@ -1,13 +1,13 @@
 from .generator import (
-    generate_coefficients,
+    generate_configuration,
     generate_scale_configuration,
-    save_coefficients,
+    save_configuration,
 )
-from .loader import load_coefficients
+from .loader import load_configuration
 
 __all__ = [
-    "generate_coefficients",
+    "generate_configuration",
     "generate_scale_configuration",
-    "save_coefficients",
-    "load_coefficients",
+    "save_configuration",
+    "load_configuration",
 ]

@@ -6,7 +6,7 @@ from waveforge.models import DWTConfiguration, ScaleConfiguration
 
 def generate_scale_configuration(scale: int) -> ScaleConfiguration:
     """
-    Generate Quadratic Spline DWT coefficients for a given scale.
+    Generate Quadratic Spline DWT configuration for a given scale.
     """
 
     if type(scale) is not int or scale < 1:
@@ -50,7 +50,7 @@ def generate_scale_configuration(scale: int) -> ScaleConfiguration:
     )
 
 
-def generate_coefficients(max_scale: int) -> DWTConfiguration:
+def generate_configuration(max_scale: int) -> DWTConfiguration:
     """
     Generate Quadratic Spline DWT configurations from scale 1
     up to the specified maximum scale.
@@ -66,7 +66,7 @@ def generate_coefficients(max_scale: int) -> DWTConfiguration:
     return DWTConfiguration(wavelet="Quadratic Spline", version="1.0", scales=scales)
 
 
-def save_coefficients(config: DWTConfiguration, dir: str | Path | None = None) -> Path:
+def save_configuration(config: DWTConfiguration, dir: str | Path | None = None) -> Path:
     """Save coefficients using configuration metadata."""
 
     wavelet_name = re.sub(r"[^a-zA-Z0-9]+", "_", config.wavelet).strip("_").lower()

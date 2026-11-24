@@ -50,7 +50,7 @@ class TestGenerateScaleConfiguration:
 
 class TestGenerateCoefficients:
     def test_generate_multiple_scales(self):
-        config = generator.generate_coefficients(5)
+        config = generator.generate_configuration(5)
 
         assert config.wavelet == "Quadratic Spline"
         assert config.version == "1.0"
@@ -59,14 +59,14 @@ class TestGenerateCoefficients:
     def test_invalid_max_scale(self):
         for invalid_scale in [0, -1, 1.5, True, "5"]:
             with pytest.raises(ValueError):
-                generator.generate_coefficients(invalid_scale)
+                generator.generate_configuration(invalid_scale)
 
 
 class TestSaveCoefficients:
     def test_save_json(self, tmp_path):
-        config = generator.generate_coefficients(3)
+        config = generator.generate_configuration(3)
 
-        output_path = generator.save_coefficients(config, dir=tmp_path)
+        output_path = generator.save_configuration(config, dir=tmp_path)
 
         assert output_path.exists()
         assert output_path.name == ("quadratic_spline_v1.0_scales_1-3.json")
@@ -85,4 +85,4 @@ class TestSaveCoefficients:
         )
 
         with pytest.raises(ValueError):
-            generator.save_coefficients(config)
+            generator.save_configuration(config)
